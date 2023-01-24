@@ -8,12 +8,13 @@ public class Vis extends JPanel {
     private Color currentColor;
     private Stroke currentStroke;
     private String currentText;
+    private int fontSize = 20;
 
     public Vis() {
         super();
         currentColor = Color.MAGENTA;
         currentStroke = new BasicStroke(10);
-        currentText = "hello world";
+        currentText = " ";
     }
 
     public void setCircleColor(Color c) {
@@ -32,11 +33,12 @@ public class Vis extends JPanel {
         Graphics2D g = (Graphics2D)g1;
         //TODO draw some simple shapes
         g.setColor(currentColor);
-        g.fillOval(50, 50, 100, 100);
+        //g.fillOval(50, 50, 100, 100);
 
-        g.setStroke(currentStroke);
-        g.drawLine(200, 300, 300, 500);
+        //g.setStroke(currentStroke);
+        //g.drawLine(200, 300, 300, 500);
 
+        g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
         g.drawString(currentText, 75, 100);
     }
 

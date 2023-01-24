@@ -90,6 +90,9 @@ public class Main extends JFrame implements ActionListener {
                         rs.next();
                         int totalCount = rs.getInt(1);
                         System.out.println("There are " + totalCount + " rows in the table.");
+
+                        //send the output to the view
+                        mainPanel.setTextContent("There are " + totalCount + " students who majored in Computer Science");
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
@@ -102,6 +105,9 @@ public class Main extends JFrame implements ActionListener {
                         rs.next();
                         int totalCount = rs.getInt(1);
                         System.out.println("There are " + totalCount + " rows in the table.");
+
+                        //send the output to the view
+                        mainPanel.setTextContent("There are " + totalCount + " students who have a GPA under 3.0");
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
@@ -114,6 +120,9 @@ public class Main extends JFrame implements ActionListener {
                         rs.next();
                         int totalCount = rs.getInt(1);
                         System.out.println("There are " + totalCount + " rows in the table.");
+
+                        //send the output to the view
+                        mainPanel.setTextContent("There are " + totalCount + " students who graduated in 2012");
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
@@ -126,6 +135,9 @@ public class Main extends JFrame implements ActionListener {
                         rs.next();
                         int totalCount = rs.getInt(1);
                         System.out.println("There are " + totalCount + " rows in the table.");
+
+                        //send the output to the view
+                        mainPanel.setTextContent("There are " + totalCount + " students from Hawaii or the Pacific");
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
@@ -138,6 +150,9 @@ public class Main extends JFrame implements ActionListener {
                         rs.next();
                         int totalCount = rs.getInt(1);
                         System.out.println("There are " + totalCount + " rows in the table.");
+
+                        //send the output to the view
+                        mainPanel.setTextContent("There are " + totalCount + " women who majored in Computer Science");
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }

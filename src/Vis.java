@@ -5,17 +5,24 @@ import java.awt.*;
 
 public class Vis extends JPanel {
 
-    private Color milly;
-    private Stroke joseph;
+    private Color currentColor;
+    private Stroke currentStroke;
+    private String currentText;
 
     public Vis() {
         super();
-        milly = Color.MAGENTA;
-        joseph = new BasicStroke(10);
+        currentColor = Color.MAGENTA;
+        currentStroke = new BasicStroke(10);
+        currentText = "hello world";
     }
 
     public void setCircleColor(Color c) {
-        milly = c;
+        currentColor = c;
+        repaint();
+    }
+
+    public void setTextContent(String s) {
+        currentText = s;
         repaint();
     }
 
@@ -24,11 +31,13 @@ public class Vis extends JPanel {
         //TODO typecast Graphics to Graphics2D
         Graphics2D g = (Graphics2D)g1;
         //TODO draw some simple shapes
-        g.setColor(milly);
+        g.setColor(currentColor);
         g.fillOval(50, 50, 100, 100);
 
-        g.setStroke(joseph);
+        g.setStroke(currentStroke);
         g.drawLine(200, 300, 300, 500);
+
+        g.drawString(currentText, 75, 100);
     }
 
 }

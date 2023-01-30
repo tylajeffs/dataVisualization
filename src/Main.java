@@ -9,6 +9,8 @@ import java.sql.*;
 public class Main extends JFrame implements ActionListener {
 
     private Vis mainPanel;
+    public static final String BAR_CHART = "Bar Chart";
+    public static final String LINE_CHART = "Line Chart";
     public static final String HOW_MANY_STUDENTS_MAJORED_IN_CS = "How many students majored in CS?";
     public static final String HOW_MANY_STUDENTS_HAVE_A_GPA_UNDER_3_0 = "How many students have a GPA under 3.0?";
     public static final String HOW_MANY_STUDENTS_GRADUATED_IN_2012 = "How many students graduated in 2012?";
@@ -21,9 +23,18 @@ public class Main extends JFrame implements ActionListener {
 
         //create the menus
         JMenu queries = new JMenu("Database Queries");
+        JMenu chartTypeToggle = new JMenu("Chart Type");
 
+        //create menu items for the chart type
+        JMenuItem bar = new JMenuItem(BAR_CHART);
+        bar.addActionListener(this);
+        bar.setActionCommand(BAR_CHART);
 
-        //create menu items
+        JMenuItem line = new JMenuItem(LINE_CHART);
+        line.addActionListener(this);
+        line.setActionCommand(LINE_CHART);
+
+        //create menu items for the queries
         JMenuItem a = new JMenuItem(HOW_MANY_STUDENTS_MAJORED_IN_CS);
         a.addActionListener(this);
         a.setActionCommand(HOW_MANY_STUDENTS_MAJORED_IN_CS);
@@ -51,15 +62,18 @@ public class Main extends JFrame implements ActionListener {
         queries.add(c);
         queries.add(d);
         queries.add(e);
+        chartTypeToggle.add(bar);
+        chartTypeToggle.add(line);
         mb.add(queries);
+        mb.add(chartTypeToggle);
         return mb;
     }
 
     public Main() {
 
         //TODO add a menu bar and (time permitting) a toolbar
-        JMenuBar tyla = createMenu();
-        setJMenuBar(tyla);
+        JMenuBar menu = createMenu();
+        setJMenuBar(menu);
 
         mainPanel = new Vis();
 

@@ -9,6 +9,7 @@ public class Vis extends JPanel {
     private Stroke currentStroke;
     private String currentText;
     private int fontSize = 20;
+    private String chartType = "";
 
     public Vis() {
         super();
@@ -24,6 +25,12 @@ public class Vis extends JPanel {
 
     public void setTextContent(String s) {
         currentText = s;
+        repaint();
+    }
+
+    public void setChartType(String s) {
+        //SET THE CHART TYPE
+        chartType = s;
         repaint();
     }
 

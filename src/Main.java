@@ -11,11 +11,11 @@ public class Main extends JFrame implements ActionListener {
     private Vis mainPanel;
     public static final String BAR_CHART = "Bar Chart";
     public static final String LINE_CHART = "Line Chart";
-    public static final String HOW_MANY_STUDENTS_MAJORED_IN_CS = "How many students majored in CS?";
-    public static final String HOW_MANY_STUDENTS_HAVE_A_GPA_UNDER_3_0 = "How many students have a GPA under 3.0?";
-    public static final String HOW_MANY_STUDENTS_GRADUATED_IN_2012 = "How many students graduated in 2012?";
-    public static final String HOW_MANY_STUDENTS_ARE_FROM_HAWAII_OR_PACIFIC = "How many students are from Hawaii or the Pacific?";
-    public static final String HOW_MANY_FEMALE_STUDENTS_MAJORED_IN_CS = "How many female students majored in CS?";
+    public static final String STUDENTS_IN_EACH_MAJOR = "How many students are in each major?";
+    public static final String STUDENTS_FROM_EACH_AREA = "Where are all the students from?";
+    public static final String GPA_OF_EACH_MAJOR = "What is the average GPA of each major?";
+    public static final String CREDITS_ATTEMPTED_PER_YEAR = "How many credits did students attempt per year?";
+    public static final String NUMBER_OF_WOMEN_PER_MAJOR = "How many women are in each major?";
 
     private JMenuBar createMenu() {
         //create the menu bar
@@ -35,25 +35,25 @@ public class Main extends JFrame implements ActionListener {
         line.setActionCommand(LINE_CHART);
 
         //create menu items for the queries
-        JMenuItem a = new JMenuItem(HOW_MANY_STUDENTS_MAJORED_IN_CS);
+        JMenuItem a = new JMenuItem(STUDENTS_IN_EACH_MAJOR);
         a.addActionListener(this);
-        a.setActionCommand(HOW_MANY_STUDENTS_MAJORED_IN_CS);
+        a.setActionCommand(STUDENTS_IN_EACH_MAJOR);
 
-        JMenuItem b = new JMenuItem(HOW_MANY_STUDENTS_HAVE_A_GPA_UNDER_3_0);
+        JMenuItem b = new JMenuItem(STUDENTS_FROM_EACH_AREA);
         b.addActionListener(this);
-        b.setActionCommand(HOW_MANY_STUDENTS_HAVE_A_GPA_UNDER_3_0);
+        b.setActionCommand(STUDENTS_FROM_EACH_AREA);
 
-        JMenuItem c = new JMenuItem(HOW_MANY_STUDENTS_GRADUATED_IN_2012);
+        JMenuItem c = new JMenuItem(GPA_OF_EACH_MAJOR);
         c.addActionListener(this);
-        c.setActionCommand(HOW_MANY_STUDENTS_GRADUATED_IN_2012);
+        c.setActionCommand(GPA_OF_EACH_MAJOR);
 
-        JMenuItem d = new JMenuItem(HOW_MANY_STUDENTS_ARE_FROM_HAWAII_OR_PACIFIC);
+        JMenuItem d = new JMenuItem(CREDITS_ATTEMPTED_PER_YEAR);
         d.addActionListener(this);
-        d.setActionCommand(HOW_MANY_STUDENTS_ARE_FROM_HAWAII_OR_PACIFIC);
+        d.setActionCommand(CREDITS_ATTEMPTED_PER_YEAR);
 
-        JMenuItem e = new JMenuItem(HOW_MANY_FEMALE_STUDENTS_MAJORED_IN_CS);
+        JMenuItem e = new JMenuItem(NUMBER_OF_WOMEN_PER_MAJOR);
         e.addActionListener(this);
-        e.setActionCommand(HOW_MANY_FEMALE_STUDENTS_MAJORED_IN_CS);
+        e.setActionCommand(NUMBER_OF_WOMEN_PER_MAJOR);
 
 
         //add all the menu items to the actual menu
@@ -96,7 +96,13 @@ public class Main extends JFrame implements ActionListener {
             Connection c = DriverManager.getConnection("jdbc:derby:pollster");
 
             switch (cmd) {
-                case HOW_MANY_STUDENTS_MAJORED_IN_CS:
+                case BAR_CHART:
+                    mainPanel.setChartType(BAR_CHART);
+                    break;
+                case LINE_CHART:
+                    mainPanel.setChartType(LINE_CHART);
+                    break;
+                case STUDENTS_IN_EACH_MAJOR:
                     mainPanel.setCircleColor(Color.RED);
                     try {
                         Statement s = c.createStatement();
@@ -111,7 +117,7 @@ public class Main extends JFrame implements ActionListener {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
                     break;
-                case HOW_MANY_STUDENTS_HAVE_A_GPA_UNDER_3_0:
+                case STUDENTS_FROM_EACH_AREA:
                     mainPanel.setCircleColor(Color.BLUE);
                     try {
                         Statement s = c.createStatement();
@@ -126,7 +132,7 @@ public class Main extends JFrame implements ActionListener {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
                     break;
-                case HOW_MANY_STUDENTS_GRADUATED_IN_2012:
+                case GPA_OF_EACH_MAJOR:
                     mainPanel.setCircleColor(Color.CYAN);
                     try {
                         Statement s = c.createStatement();
@@ -141,7 +147,7 @@ public class Main extends JFrame implements ActionListener {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
                     break;
-                case HOW_MANY_STUDENTS_ARE_FROM_HAWAII_OR_PACIFIC:
+                case CREDITS_ATTEMPTED_PER_YEAR:
                     mainPanel.setCircleColor(Color.PINK);
                     try {
                         Statement s = c.createStatement();
@@ -156,7 +162,7 @@ public class Main extends JFrame implements ActionListener {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
                     break;
-                case HOW_MANY_FEMALE_STUDENTS_MAJORED_IN_CS:
+                case NUMBER_OF_WOMEN_PER_MAJOR:
                     mainPanel.setCircleColor(Color.GREEN);
                     try {
                         Statement s = c.createStatement();

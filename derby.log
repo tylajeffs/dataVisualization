@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Mon Jan 23 21:13:53 HST 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0185-e2a0-47c7-00000f847338 
-on database directory /Users/tylajeffs/IdeaProjects/dataVisualization/pollster with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1de0aca6 
+Mon Jan 30 10:41:37 HST 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0186-0469-f1d3-00000f32bf08 
+on database directory /Users/tylajeffs/IdeaProjects/dataVisualization/pollster with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
 Loaded from file:/Users/tylajeffs/Downloads/db-derby-10.16.1.1-bin/lib/derby.jar
 java.vendor=Amazon.com Inc.
 java.runtime.version=18.0.2+9-FR

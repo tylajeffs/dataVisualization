@@ -11,7 +11,7 @@ public class Vis extends JPanel {
     private Stroke currentStroke;
     private String currentText;
     private int fontSize = 20;
-    private String chartType = "";
+    private String chartType = "Bar Chart"; //default to bar chart
     private java.util.List<String> labels = new ArrayList<>();
     private List<Double> ratios = new ArrayList<>();
 
@@ -26,6 +26,7 @@ public class Vis extends JPanel {
         currentColor = c;
         repaint();
     }
+
 
     public void setBarData(List<String> l, List<Double> r) {
 
@@ -57,30 +58,52 @@ public class Vis extends JPanel {
         //typecast Graphics to Graphics2D
         Graphics2D g = (Graphics2D)g1;
 
-        //get the width of the screen
+        //get the width/height of the screen
         int w = getWidth();
+        int h = getHeight();
+
+        //starting point
+        int y = 100;
+        int x = 300;
+        //draw the chart
+        if(chartType.equals("Bar Chart")) {
+            //BAR CHART IS THE WRONG WAY!
+            /**
+            for (int i=0; i<labels.size(); i++) {
+                //draw the labels
+                g.setColor(Color.BLACK);
+                g.drawString(labels.get(i), 15, y-30);
+
+                //draw the bar line
+                int lineWidth = (int)((w-40) * ratios.get(i));
+                g.setStroke(new BasicStroke(50));
+                g.setColor(currentColor);
+                g.drawLine(40, y, lineWidth, y);
+
+                y += 80;
+            }
+             **/
 
 
+            for (int i=0; i<labels.size(); i++) {
+                //draw the labels
+                g.setColor(Color.BLACK);
+                g.drawString(labels.get(i), x+30, 15);
 
-        g.setColor(currentColor);
-        //g.fillOval(50, 50, 100, 100);
+                //draw the bar line
+                int lineWidth = (int)((h-40) * ratios.get(i));
+                g.setStroke(new BasicStroke(50));
+                g.setColor(currentColor);
+                g.drawLine(x, 40, x, lineWidth);
 
-        //g.setStroke(currentStroke);
-        //g.drawLine(200, 300, 300, 500);
+                x += 80;
+            }
 
-        //g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
-        //g.drawString(currentText, 75, 100);
-        System.out.println("this is the size of labels: " + labels.size());
+        } else if(chartType.equals("Line Chart"))  {
 
-        int y = 200;
-        for (int i=0; i<labels.size(); i++) {
-            g.drawString(labels.get(i), 10, y);
-            int lineWidth = (int)(w * ratios.get(i));
-            g.setStroke(new BasicStroke(10));
-            g.drawLine(0, y+10, lineWidth, y+10);
-
-            y += 30;
         }
+
+
     }
 
 }

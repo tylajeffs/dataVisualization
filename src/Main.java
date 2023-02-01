@@ -76,8 +76,6 @@ public class Main extends JFrame implements ActionListener {
     }
 
     public Main() {
-
-        //TODO add a menu bar and (time permitting) a toolbar
         JMenuBar menu = createMenu();
         setJMenuBar(menu);
 
@@ -96,6 +94,7 @@ public class Main extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //gets called when someone clicks a menu
         System.out.println("a menu was clicked");
         String cmd = e.getActionCommand();
         try {

@@ -37,8 +37,6 @@ public class Vis extends JPanel {
         //put in the new data
         labels = l;
         ratios = r;
-
-        System.out.println("initial size of labels: " + labels.size());
         repaint();
     }
 
@@ -63,40 +61,34 @@ public class Vis extends JPanel {
         int h = getHeight();
 
         //starting point
-        int y = 100;
-        int x = 300;
+        int y = 0;
+        int x = 0;
         //draw the chart
         if(chartType.equals("Bar Chart")) {
-            //BAR CHART IS THE WRONG WAY!
-            /**
-            for (int i=0; i<labels.size(); i++) {
-                //draw the labels
-                g.setColor(Color.BLACK);
-                g.drawString(labels.get(i), 15, y-30);
 
-                //draw the bar line
-                int lineWidth = (int)((w-40) * ratios.get(i));
-                g.setStroke(new BasicStroke(50));
-                g.setColor(currentColor);
-                g.drawLine(40, y, lineWidth, y);
-
-                y += 80;
+            //figure out the spacing
+            int lineWidth = 0;
+            if(labels.size() != 0) {
+                lineWidth = w/(labels.size());
+                System.out.println("this is the space: " + lineWidth);
             }
-             **/
 
 
+
+            //draw the bar chart
             for (int i=0; i<labels.size(); i++) {
+
                 //draw the labels
                 g.setColor(Color.BLACK);
-                g.drawString(labels.get(i), x+30, 15);
+                g.drawString(labels.get(i), x+40, h-40);
 
                 //draw the bar line
-                int lineWidth = (int)((h-40) * ratios.get(i));
-                g.setStroke(new BasicStroke(50));
+                int lineHeight = (int)((h-40) * ratios.get(i));
+                g.setStroke(new BasicStroke(lineWidth - 40));
                 g.setColor(currentColor);
-                g.drawLine(x, 40, x, lineWidth);
+                g.drawLine(x+100, h, x+100, h-lineHeight);
 
-                x += 80;
+                x += (lineWidth);
             }
 
         } else if(chartType.equals("Line Chart"))  {

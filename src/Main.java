@@ -108,7 +108,7 @@ public class Main extends JFrame implements ActionListener {
                     mainPanel.setChartType(LINE_CHART);
                     break;
                 case STUDENTS_IN_EACH_MAJOR:
-                    mainPanel.setCircleColor(Color.RED);
+                    mainPanel.setCircleColor(new Color(242, 167, 167));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -143,7 +143,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case STUDENTS_FROM_EACH_AREA:
-                    mainPanel.setCircleColor(Color.BLUE);
+                    mainPanel.setCircleColor(new Color(203, 247, 188));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -178,7 +178,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case GPA_OF_EACH_MAJOR:
-                    mainPanel.setCircleColor(Color.CYAN);
+                    mainPanel.setCircleColor(new Color(188, 247, 239));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -187,7 +187,7 @@ public class Main extends JFrame implements ActionListener {
 
                         Statement s = c.createStatement();
                         //TODO FIGURE OUT THIS QUERY
-                        ResultSet rs = s.executeQuery("select avg(gpa), count(*) from cis2019 group by major");
+                        ResultSet rs = s.executeQuery("select cast(avg(gpa) as decimal(5,2)), major from cis2019 group by major");
                         while (rs.next() == true) {
                             String major = rs.getString(1);
                             double num = rs.getInt(2);
@@ -214,7 +214,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case CREDITS_ATTEMPTED_PER_YEAR:
-                    mainPanel.setCircleColor(Color.PINK);
+                    mainPanel.setCircleColor(new Color(220, 208, 247));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -222,7 +222,7 @@ public class Main extends JFrame implements ActionListener {
                         values.clear();
 
                         Statement s = c.createStatement();
-                        ResultSet rs = s.executeQuery("select avg(credits_attempted), count(*) from cis2019 group by gradyear");
+                        ResultSet rs = s.executeQuery("select cast(avg(credits_attempted) as decimal(5,2)), gradyear from cis2019 group by gradyear order by gradyear");
                         while (rs.next() == true) {
                             String major = rs.getString(1);
                             double num = rs.getInt(2);
@@ -249,7 +249,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case NUMBER_OF_WOMEN_PER_MAJOR:
-                    mainPanel.setCircleColor(Color.GREEN);
+                    mainPanel.setCircleColor(new Color(250, 243, 197));
                     try {
                         //clear all the arraylists
                         ratios.clear();

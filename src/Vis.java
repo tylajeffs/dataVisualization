@@ -2,6 +2,8 @@
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vis extends JPanel {
 
@@ -10,6 +12,8 @@ public class Vis extends JPanel {
     private String currentText;
     private int fontSize = 20;
     private String chartType = "";
+    private java.util.List<String> labels = new ArrayList<>();
+    private List<Double> ratios = new ArrayList<>();
 
     public Vis() {
         super();
@@ -20,6 +24,13 @@ public class Vis extends JPanel {
 
     public void setCircleColor(Color c) {
         currentColor = c;
+        repaint();
+    }
+
+    public void setBarData(List<String> l, List<Double> r) {
+        //TODO accept the data, then render it.
+        labels = l;
+        ratios = r;
         repaint();
     }
 
@@ -34,19 +45,38 @@ public class Vis extends JPanel {
         repaint();
     }
 
+    public void buildChart(String xLabel, String yLabel ) {
+        repaint();
+    }
+
     @Override
     public void paintComponent(Graphics g1) {
-        //TODO typecast Graphics to Graphics2D
+        //typecast Graphics to Graphics2D
         Graphics2D g = (Graphics2D)g1;
-        //TODO draw some simple shapes
+
+        //get the width of the screen
+        int w = getWidth();
+
+
+
         g.setColor(currentColor);
         //g.fillOval(50, 50, 100, 100);
 
         //g.setStroke(currentStroke);
         //g.drawLine(200, 300, 300, 500);
 
-        g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
-        g.drawString(currentText, 75, 100);
+        //g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
+        //g.drawString(currentText, 75, 100);
+
+        int y = 200;
+        for (int i=0; i<labels.size(); i++) {
+            g.drawString(labels.get(i), 10, y);
+            int lineWidth = (int)(w * ratios.get(i));
+            g.setStroke(new BasicStroke(10));
+            g.drawLine(0, y+10, lineWidth, y+10);
+
+            y += 30;
+        }
     }
 
 }

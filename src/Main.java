@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends JFrame implements ActionListener {
 
@@ -16,6 +18,10 @@ public class Main extends JFrame implements ActionListener {
     public static final String GPA_OF_EACH_MAJOR = "What is the average GPA of each major?";
     public static final String CREDITS_ATTEMPTED_PER_YEAR = "How many credits did students attempt per year?";
     public static final String NUMBER_OF_WOMEN_PER_MAJOR = "How many women are in each major?";
+
+    private java.util.List<String> labels = new ArrayList<>();
+    private java.util.List<Double> values = new ArrayList<>();
+    private List<Double> ratios = new ArrayList<>();
 
     private JMenuBar createMenu() {
         //create the menu bar
@@ -106,13 +112,28 @@ public class Main extends JFrame implements ActionListener {
                     mainPanel.setCircleColor(Color.RED);
                     try {
                         Statement s = c.createStatement();
-                        ResultSet rs = s.executeQuery("select count(*) from cis2019 where major='Computer Science'");
-                        rs.next();
-                        int totalCount = rs.getInt(1);
-                        System.out.println("There are " + totalCount + " rows in the table.");
+                        ResultSet rs = s.executeQuery("select major, count(*) from cis2019 group by major");
+                        while (rs.next() == true) {
+                            String major = rs.getString(1);
+                            double num = rs.getInt(2);
+                            labels.add(major);
+                            values.add(num);
+                            System.out.println(major + " = " + num);
+                        }
+
+                        c.close(); //close the connection
+
+                        //find the biggest value
+                        double max = values.stream().max(Double::compare).get();
+
+                        //calculate the ratios
+                        for (var v : values) {
+                            ratios.add(v / max);
+                        }
 
                         //send the output to the view
-                        mainPanel.setTextContent("There are " + totalCount + " students who majored in Computer Science");
+                        mainPanel.setBarData(labels, ratios);
+
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }

@@ -14,6 +14,7 @@ public class Vis extends JPanel {
     private String chartType = "Bar Chart"; //default to bar chart
     private java.util.List<String> labels = new ArrayList<>();
     private List<Double> ratios = new ArrayList<>();
+    private double maxQueryResult;
 
     public Vis() {
         super();
@@ -28,7 +29,7 @@ public class Vis extends JPanel {
     }
 
 
-    public void setBarData(List<String> l, List<Double> r) {
+    public void setBarData(List<String> l, List<Double> r, double max) {
 
         //clear the data
         //labels.clear();
@@ -37,6 +38,7 @@ public class Vis extends JPanel {
         //put in the new data
         labels = l;
         ratios = r;
+        maxQueryResult = max;
         repaint();
     }
 
@@ -78,17 +80,30 @@ public class Vis extends JPanel {
             //draw the bar chart
             for (int i=0; i<labels.size(); i++) {
 
-                //draw the labels
-                g.setColor(Color.BLACK);
-                g.drawString(labels.get(i), x+40, h-40);
-
                 //draw the bar line
                 int lineHeight = (int)((h-40) * ratios.get(i));
                 g.setStroke(new BasicStroke(lineWidth - 40));
                 g.setColor(currentColor);
                 g.drawLine(x+100, h, x+100, h-lineHeight);
 
+                //draw the labels
+                g.setColor(Color.BLACK);
+                g.drawString(labels.get(i), x+40, h-40);
+
                 x += (lineWidth);
+            }
+
+            //draw the Y axis
+            g.setStroke(new BasicStroke(1));
+            g.setColor(Color.BLACK);
+            g.drawLine(10,0,10,h);
+            double delta = maxQueryResult/4;
+            for(int i=0; i<5; i++) {
+                double yAxisLabel = 0 + (delta*i);
+                System.out.println("this is the label: " + yAxisLabel);
+                int yy = (h-40) - i*(h/4);
+                g.drawString(""+yAxisLabel,10,yy);
+
             }
 
         } else if(chartType.equals("Line Chart"))  {

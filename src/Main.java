@@ -23,6 +23,7 @@ public class Main extends JFrame implements ActionListener {
     private java.util.List<Double> values = new ArrayList<>();
     private List<Double> ratios = new ArrayList<>();
 
+
     private JMenuBar createMenu() {
         //create the menu bar
         JMenuBar mb = new JMenuBar();
@@ -136,7 +137,7 @@ public class Main extends JFrame implements ActionListener {
                         }
 
                         //send the output to the view
-                        mainPanel.setBarData(labels, ratios);
+                        mainPanel.setBarData(labels, ratios, max);
 
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
@@ -171,7 +172,7 @@ public class Main extends JFrame implements ActionListener {
                         }
 
                         //send the output to the view
-                        mainPanel.setBarData(labels, ratios);
+                        mainPanel.setBarData(labels, ratios, max);
 
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
@@ -207,7 +208,7 @@ public class Main extends JFrame implements ActionListener {
                         }
 
                         //send the output to the view
-                        mainPanel.setBarData(labels, ratios);
+                        mainPanel.setBarData(labels, ratios, max);
 
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
@@ -242,7 +243,7 @@ public class Main extends JFrame implements ActionListener {
                         }
 
                         //send the output to the view
-                        mainPanel.setBarData(labels, ratios);
+                        mainPanel.setBarData(labels, ratios, max);
 
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
@@ -277,7 +278,7 @@ public class Main extends JFrame implements ActionListener {
                         }
 
                         //send the output to the view
-                        mainPanel.setBarData(labels, ratios);
+                        mainPanel.setBarData(labels, ratios, max);
 
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());

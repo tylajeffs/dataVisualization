@@ -111,6 +111,11 @@ public class Main extends JFrame implements ActionListener {
                 case STUDENTS_IN_EACH_MAJOR:
                     mainPanel.setCircleColor(Color.RED);
                     try {
+                        //clear all the arraylists
+                        ratios.clear();
+                        labels.clear();
+                        values.clear();
+
                         Statement s = c.createStatement();
                         ResultSet rs = s.executeQuery("select major, count(*) from cis2019 group by major");
                         while (rs.next() == true) {
@@ -141,14 +146,34 @@ public class Main extends JFrame implements ActionListener {
                 case STUDENTS_FROM_EACH_AREA:
                     mainPanel.setCircleColor(Color.BLUE);
                     try {
+                        //clear all the arraylists
+                        ratios.clear();
+                        labels.clear();
+                        values.clear();
+
                         Statement s = c.createStatement();
-                        ResultSet rs = s.executeQuery("select count(*) from cis2019 where gpa<3");
-                        rs.next();
-                        int totalCount = rs.getInt(1);
-                        System.out.println("There are " + totalCount + " rows in the table.");
+                        ResultSet rs = s.executeQuery("select home, count(*) from cis2019 group by home");
+                        while (rs.next() == true) {
+                            String major = rs.getString(1);
+                            double num = rs.getInt(2);
+                            labels.add(major);
+                            values.add(num);
+                            System.out.println(major + " = " + num);
+                        }
+
+                        c.close(); //close the connection
+
+                        //find the biggest value
+                        double max = values.stream().max(Double::compare).get();
+
+                        //calculate the ratios
+                        for (var v : values) {
+                            ratios.add(v / max);
+                        }
 
                         //send the output to the view
-                        mainPanel.setTextContent("There are " + totalCount + " students who have a GPA under 3.0");
+                        mainPanel.setBarData(labels, ratios);
+
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
@@ -156,14 +181,35 @@ public class Main extends JFrame implements ActionListener {
                 case GPA_OF_EACH_MAJOR:
                     mainPanel.setCircleColor(Color.CYAN);
                     try {
+                        //clear all the arraylists
+                        ratios.clear();
+                        labels.clear();
+                        values.clear();
+
                         Statement s = c.createStatement();
-                        ResultSet rs = s.executeQuery("select count(*) from cis2019 where gradyear=2012");
-                        rs.next();
-                        int totalCount = rs.getInt(1);
-                        System.out.println("There are " + totalCount + " rows in the table.");
+                        //TODO FIGURE OUT THIS QUERY
+                        ResultSet rs = s.executeQuery("select avg(gpa), count(*) from cis2019 group by major");
+                        while (rs.next() == true) {
+                            String major = rs.getString(1);
+                            double num = rs.getInt(2);
+                            labels.add(major);
+                            values.add(num);
+                            System.out.println(major + " = " + num);
+                        }
+
+                        c.close(); //close the connection
+
+                        //find the biggest value
+                        double max = values.stream().max(Double::compare).get();
+
+                        //calculate the ratios
+                        for (var v : values) {
+                            ratios.add(v / max);
+                        }
 
                         //send the output to the view
-                        mainPanel.setTextContent("There are " + totalCount + " students who graduated in 2012");
+                        mainPanel.setBarData(labels, ratios);
+
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
@@ -171,14 +217,34 @@ public class Main extends JFrame implements ActionListener {
                 case CREDITS_ATTEMPTED_PER_YEAR:
                     mainPanel.setCircleColor(Color.PINK);
                     try {
+                        //clear all the arraylists
+                        ratios.clear();
+                        labels.clear();
+                        values.clear();
+
                         Statement s = c.createStatement();
-                        ResultSet rs = s.executeQuery("select count(*) from cis2019 where home='Hawaii' or home='Pacific'");
-                        rs.next();
-                        int totalCount = rs.getInt(1);
-                        System.out.println("There are " + totalCount + " rows in the table.");
+                        ResultSet rs = s.executeQuery("select avg(credits_attempted), count(*) from cis2019 group by gradyear");
+                        while (rs.next() == true) {
+                            String major = rs.getString(1);
+                            double num = rs.getInt(2);
+                            labels.add(major);
+                            values.add(num);
+                            System.out.println(major + " = " + num);
+                        }
+
+                        c.close(); //close the connection
+
+                        //find the biggest value
+                        double max = values.stream().max(Double::compare).get();
+
+                        //calculate the ratios
+                        for (var v : values) {
+                            ratios.add(v / max);
+                        }
 
                         //send the output to the view
-                        mainPanel.setTextContent("There are " + totalCount + " students from Hawaii or the Pacific");
+                        mainPanel.setBarData(labels, ratios);
+
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }
@@ -186,14 +252,34 @@ public class Main extends JFrame implements ActionListener {
                 case NUMBER_OF_WOMEN_PER_MAJOR:
                     mainPanel.setCircleColor(Color.GREEN);
                     try {
+                        //clear all the arraylists
+                        ratios.clear();
+                        labels.clear();
+                        values.clear();
+
                         Statement s = c.createStatement();
-                        ResultSet rs = s.executeQuery("select count(*) from cis2019 where gender='F' and major='Computer Science'");
-                        rs.next();
-                        int totalCount = rs.getInt(1);
-                        System.out.println("There are " + totalCount + " rows in the table.");
+                        ResultSet rs = s.executeQuery("select major, count(*) from cis2019 where gender = 'F' group by major");
+                        while (rs.next() == true) {
+                            String major = rs.getString(1);
+                            double num = rs.getInt(2);
+                            labels.add(major);
+                            values.add(num);
+                            System.out.println(major + " = " + num);
+                        }
+
+                        c.close(); //close the connection
+
+                        //find the biggest value
+                        double max = values.stream().max(Double::compare).get();
+
+                        //calculate the ratios
+                        for (var v : values) {
+                            ratios.add(v / max);
+                        }
 
                         //send the output to the view
-                        mainPanel.setTextContent("There are " + totalCount + " women who majored in Computer Science");
+                        mainPanel.setBarData(labels, ratios);
+
                     } catch (SQLException ex) {
                         System.out.println("oops, couldn't run query " + ex.toString());
                     }

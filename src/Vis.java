@@ -28,9 +28,16 @@ public class Vis extends JPanel {
     }
 
     public void setBarData(List<String> l, List<Double> r) {
-        //TODO accept the data, then render it.
+
+        //clear the data
+        //labels.clear();
+        //ratios.clear();
+
+        //put in the new data
         labels = l;
         ratios = r;
+
+        System.out.println("initial size of labels: " + labels.size());
         repaint();
     }
 
@@ -42,10 +49,6 @@ public class Vis extends JPanel {
     public void setChartType(String s) {
         //SET THE CHART TYPE
         chartType = s;
-        repaint();
-    }
-
-    public void buildChart(String xLabel, String yLabel ) {
         repaint();
     }
 
@@ -67,6 +70,7 @@ public class Vis extends JPanel {
 
         //g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
         //g.drawString(currentText, 75, 100);
+        System.out.println("this is the size of labels: " + labels.size());
 
         int y = 200;
         for (int i=0; i<labels.size(); i++) {

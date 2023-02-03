@@ -187,7 +187,6 @@ public class Main extends JFrame implements ActionListener {
                         values.clear();
 
                         Statement s = c.createStatement();
-                        //TODO FIGURE OUT THIS QUERY
                         ResultSet rs = s.executeQuery("select cast(avg(gpa) as decimal(5,2)), major from cis2019 group by major");
                         while (rs.next() == true) {
                             String major = rs.getString(2);
@@ -258,7 +257,7 @@ public class Main extends JFrame implements ActionListener {
                         values.clear();
 
                         Statement s = c.createStatement();
-                        ResultSet rs = s.executeQuery("select major, count(*) from cis2019 where gender = 'F' group by major");
+                        ResultSet rs = s.executeQuery("select major, count(*) from cis2019 where gender = 'F' group by major ");
                         while (rs.next() == true) {
                             String major = rs.getString(1);
                             double num = rs.getInt(2);

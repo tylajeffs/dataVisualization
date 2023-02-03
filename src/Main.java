@@ -109,7 +109,7 @@ public class Main extends JFrame implements ActionListener {
                     mainPanel.setChartType(LINE_CHART);
                     break;
                 case STUDENTS_IN_EACH_MAJOR:
-                    mainPanel.setCircleColor(new Color(242, 167, 167));
+                    mainPanel.setCircleColor(new Color(92, 29, 34));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -144,7 +144,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case STUDENTS_FROM_EACH_AREA:
-                    mainPanel.setCircleColor(new Color(203, 247, 188));
+                    mainPanel.setCircleColor(new Color(135, 53, 121));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -179,7 +179,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case GPA_OF_EACH_MAJOR:
-                    mainPanel.setCircleColor(new Color(188, 247, 239));
+                    mainPanel.setCircleColor(new Color(64, 35, 87));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -190,8 +190,8 @@ public class Main extends JFrame implements ActionListener {
                         //TODO FIGURE OUT THIS QUERY
                         ResultSet rs = s.executeQuery("select cast(avg(gpa) as decimal(5,2)), major from cis2019 group by major");
                         while (rs.next() == true) {
-                            String major = rs.getString(1);
-                            double num = rs.getInt(2);
+                            String major = rs.getString(2);
+                            double num = rs.getInt(1);
                             labels.add(major);
                             values.add(num);
                             System.out.println(major + " = " + num);
@@ -215,7 +215,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case CREDITS_ATTEMPTED_PER_YEAR:
-                    mainPanel.setCircleColor(new Color(220, 208, 247));
+                    mainPanel.setCircleColor(new Color(33, 80, 94));
                     try {
                         //clear all the arraylists
                         ratios.clear();
@@ -250,7 +250,7 @@ public class Main extends JFrame implements ActionListener {
                     }
                     break;
                 case NUMBER_OF_WOMEN_PER_MAJOR:
-                    mainPanel.setCircleColor(new Color(250, 243, 197));
+                    mainPanel.setCircleColor(new Color(26, 79, 25));
                     try {
                         //clear all the arraylists
                         ratios.clear();

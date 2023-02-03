@@ -14,6 +14,8 @@ public class Vis extends JPanel {
     private String chartType = "Bar Chart"; //default to bar chart
     private java.util.List<String> labels = new ArrayList<>();
     private List<Double> ratios = new ArrayList<>();
+    private int lastXCoordinate;
+    private int lastYCoordinate;
     private double maxQueryResult;
 
     public Vis() {
@@ -75,8 +77,6 @@ public class Vis extends JPanel {
                 System.out.println("this is the space: " + lineWidth);
             }
 
-
-
             //draw the bar chart
             for (int i=0; i<labels.size(); i++) {
 
@@ -107,6 +107,57 @@ public class Vis extends JPanel {
             }
 
         } else if(chartType.equals("Line Chart"))  {
+
+            //figure out the spacing
+            int lineWidth = 0;
+            if(labels.size() != 0) {
+                lineWidth = w/(labels.size());
+
+            }
+
+
+
+            //draw the line chart
+            for (int i=0; i<labels.size(); i++) {
+
+                //draw the circle
+                int lineHeight = (int)((h-40) * ratios.get(i));
+                g.setColor(currentColor);
+                g.fillOval(x+100-15,h-lineHeight-15,30,30);
+
+                //check to see if this is the first one
+                if(i!=0) {
+                    //draw the line between the circles
+                    g.setStroke(new BasicStroke(3));
+                    g.drawLine(lastXCoordinate,lastYCoordinate,x+100,h-lineHeight);
+
+                }
+                //save the new coordinates
+                lastXCoordinate = x+100;
+                lastYCoordinate = h-lineHeight;
+
+
+
+
+                //draw the labels
+                g.setColor(Color.BLACK);
+                g.drawString(labels.get(i), x+40, h-40);
+
+                x += (lineWidth);
+            }
+
+            //draw the Y axis
+            g.setStroke(new BasicStroke(1));
+            g.setColor(Color.BLACK);
+            g.drawLine(10,0,10,h);
+            double delta = maxQueryResult/4;
+            for(int i=0; i<5; i++) {
+                double yAxisLabel = 0 + (delta*i);
+                System.out.println("this is the label: " + yAxisLabel);
+                int yy = (h-40) - i*(h/4);
+                g.drawString(""+yAxisLabel,10,yy);
+
+            }
 
         }
 
